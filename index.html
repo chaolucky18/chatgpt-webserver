@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventSource</title>
+</head>
+
+<body>
+    <script>
+        // SSE的API在EventSource对象上
+        // 可以使用 if('EventSource' in window) 判断浏览器是否支持SSE
+        // 建立SSE连接，直接如下创建EventSource实例，支持跨越
+        var source = new EventSource("http://127.0.0.1:8000/bot_txt");
+
+        // EventSource.readyState代表连接状态，有以下三种情况
+        // 0 —> 连接还未建立，或者正在断线重连
+        // 1 -> 连接已建立，可以接受数据
+        // 2 -> 连接已关闭或请求错误
+
+        var div = document.getElementById("page");
+
+        // 连接创建成功的回调事件
+        source.onopen = function (event) {
+            console.log("opened");
+        };
+
+        // 连接创建失败的回调事件
+        source.onerror = function (event) {
+            console.log("opened");
+        };
+
+        // 接受到数据的回调事件，event未特殊设置时，默认是message
+        source.onmessage = function (event) {
+            console.log("data: ", event.data);
+        };
+
+        // 关闭连接  source.close();
+
+    </script>
+</body>
+
+</html>
